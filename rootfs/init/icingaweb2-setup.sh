@@ -8,15 +8,7 @@ sed -r -i "s~^;?date.timezone =.*~date.timezone = ${TIMEZONE:-UTC}~" /etc/php7/p
 
 # Enable modules
 if [ ! -e /etc/icingaweb2/enabledModules ] || [ $(ls -1 /etc/icingaweb2/enabledModules | wc -l) -le 0 ] ; then
-  icingacli module enable ipl
-  icingacli module enable incubator
-  icingacli module enable reactbundle
   icingacli module enable monitoring
-  icingacli module enable doc
-  icingacli module enable translation
-  icingacli module enable director
-  icingacli module enable cube
-  icingacli module enable businessprocess
 fi
 
 # Setup resources.ini
