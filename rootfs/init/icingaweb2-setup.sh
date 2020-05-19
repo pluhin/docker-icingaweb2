@@ -32,4 +32,5 @@ fi
 rm -rf /etc/icingaweb2/resources.ini
 
 chown -R apache /etc/icingaweb2
+chmod -R a+w /etc/icingaweb2
 

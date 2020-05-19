@@ -37,7 +37,6 @@ RUN apk add --no-cache \
 ADD rootfs /
 
 EXPOSE 80
-VOLUME [ "/etc/icingaweb2"]
 
 CMD ["/init/run.sh"]
 
