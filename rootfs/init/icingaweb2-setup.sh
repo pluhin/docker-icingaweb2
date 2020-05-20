@@ -1,15 +1,6 @@
 #!/bin/sh
 set -e
 
-# Set timezone for PHP
-sed -r -i "s~^;?date.timezone =.*~date.timezone = ${TIMEZONE:-UTC}~" /etc/php7/php.ini
-
-[ "$ICINGAWEB_AUTOCONF" == false ] && exit 0 || true
-
-# Enable modules
-if [ ! -e /etc/icingaweb2/enabledModules ] || [ $(ls -1 /etc/icingaweb2/enabledModules | wc -l) -le 0 ] ; then
-  icingacli module enable monitoring
-fi
 
 # Set icinga2 api pass
 if [ -n "$ICINGA_API_PASS" ] ; then

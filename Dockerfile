@@ -25,19 +25,14 @@ RUN apk add --no-cache \
       php7-posix php7-sockets icingaweb2 &&  \
     ln -sf /usr/bin/php7 /usr/bin/php && \
     mkdir -p /run/apache2 && \
-    echo "Fetch Icingaweb2 ${ICINGAWEB_VERSION}"
-    # mkdir /icingaweb2 && \
-    # wget -q -O - https://github.com/Icinga/icingaweb2/archive/v${ICINGAWEB_VERSION}.tar.gz \
-    #   | tar xz --strip 1 -C /icingaweb2 && \
-    # ln -s /icingaweb2/bin/icingacli /usr/bin/icingacli && \
-    # chown -R apache /icingaweb2 && \
-    # mkdir -p /var/log/icingaweb2 && \
-    # chown -R apache /var/log/icingaweb2 
+    echo "Fetch Icingaweb2 ${ICINGAWEB_VERSION}" && \
+    sed -r -i "s~^;?date.timezone =.*~date.timezone = ${TIMEZONE:-UTC}~" /etc/php7/php.ini
 
 ADD rootfs /
 
 RUN cp -a /temp/icingaweb2 /etc && \
-    chown -R apache /etc/icingaweb2
+    chown -R apache /etc/icingaweb2 && \
+    icingacli module enable monitoring
 EXPOSE 80
 
 CMD ["/init/run.sh"]
