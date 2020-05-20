@@ -11,13 +11,6 @@ if [ ! -e /etc/icingaweb2/enabledModules ] || [ $(ls -1 /etc/icingaweb2/enabledM
   icingacli module enable monitoring
 fi
 
-# Setup resources.ini
-# if [ ! -e /etc/icingaweb2/resources.ini ]; then
-#   while read line; do
-#     eval echo "$line"
-#   done < /temp/resources.ini > /etc/icingaweb2/resources.ini
-# fi
-
 # Set icinga2 api pass
 if [ -n "$ICINGA_API_PASS" ] ; then
   sed -r -i "s/^password = .*/password = \"${ICINGA_API_PASS}\"/g" \

@@ -2,8 +2,8 @@ FROM alpine:3.10
 
 LABEL maintainer="pluhin@gmail.com"
 
-ENV REFRESHED_AT="2020-05-18"\
-    ICINGAWEB_VERSION="2.7.3" \
+ENV REFRESHED_AT="2020-05-20"\
+    ICINGAWEB_VERSION="2.8.0-rc1" \
     TIMEZONE="UTC" \
     ICINGAWEB_AUTOCONF=true \
     ICINGA_API_PASS="super-secret" \
@@ -22,17 +22,17 @@ RUN apk add --no-cache \
       ca-certificates openssl \
       php7 php7-apache2 php7-pdo_pgsql php7-openssl php7-intl php7-ldap php7-gettext \
       php7-ctype php7-json php7-mbstring php7-session php7-curl php7-iconv php7-pcntl \
-      php7-posix php7-sockets && \
+      php7-posix php7-sockets icingaweb2 &&  \
     ln -sf /usr/bin/php7 /usr/bin/php && \
     mkdir -p /run/apache2 && \
-    echo "Fetch Icingaweb2 ${ICINGAWEB_VERSION}" && \
-    mkdir /icingaweb2 && \
-    wget -q -O - https://github.com/Icinga/icingaweb2/archive/v${ICINGAWEB_VERSION}.tar.gz \
-      | tar xz --strip 1 -C /icingaweb2 && \
-    ln -s /icingaweb2/bin/icingacli /usr/bin/icingacli && \
-    chown -R apache /icingaweb2 && \
-    mkdir -p /var/log/icingaweb2 && \
-    chown -R apache /var/log/icingaweb2 
+    echo "Fetch Icingaweb2 ${ICINGAWEB_VERSION}"
+    # mkdir /icingaweb2 && \
+    # wget -q -O - https://github.com/Icinga/icingaweb2/archive/v${ICINGAWEB_VERSION}.tar.gz \
+    #   | tar xz --strip 1 -C /icingaweb2 && \
+    # ln -s /icingaweb2/bin/icingacli /usr/bin/icingacli && \
+    # chown -R apache /icingaweb2 && \
+    # mkdir -p /var/log/icingaweb2 && \
+    # chown -R apache /var/log/icingaweb2 
 
 ADD rootfs /
 
