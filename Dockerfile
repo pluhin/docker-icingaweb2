@@ -31,8 +31,8 @@ RUN apk add --no-cache \
 ADD rootfs /
 
 RUN cp -a /temp/icingaweb2 /etc && \
-    chown -R apache /etc/icingaweb2 && \
-    icingacli module enable monitoring
+    icingacli module enable monitoring && \
+    chown -R apache /etc/icingaweb2
 EXPOSE 80
 
 CMD ["/init/run.sh"]
