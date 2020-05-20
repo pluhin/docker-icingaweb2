@@ -36,9 +36,9 @@ sudo docker run \
 ```
 
 
-### Configuration via ENV Vars:
+## Likns
 
-
+https://blog.sleeplessbeastie.eu/2018/01/15/how-to-install-icinga2-and-icingaweb2/
 
 
 ## Maintainer
