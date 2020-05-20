@@ -1,8 +1,12 @@
 # Icingaweb2 Container
 
-* Icingaweb2 v2.7.3
+This is container for k8s deployment. All configuration settings could be added in k8s cluster like config maps (example: resources.ini)
+
+* Icingaweb2 v2.8.0-rc1
 * Alpine based
-* Requires PostgreSQL
+* Requires PostgreSQL with existing DBs
+  * icingaweb_db - Icinga Web credential
+  * icinga_ido - Icinga2 monitoring data
 * Docker-Healthcheck support
 
 **Exposed Volume: `/etc/icingaweb2`**: Icingaweb2 Config Files  
@@ -28,31 +32,13 @@ sudo docker run \
   -e TIMEZONE=Europe/Minsk \
   -e ICINGA_API_PASS=damn-secret \
   -e WEB_DB_PASS=top-secret \
-  -v $PWD/conf:/etc/icingaweb2 \
   pluhin31/icinga2-web
 ```
 
 
 ### Configuration via ENV Vars:
 
-* `TIMEZONE=UTC`: Timezone
-* `ICINGAWEB_AUTOCONFIG=true`: Set to false to disable auto configuration
-* `ICINGA_API_PASS`: Password Icinga2 API user `icingaweb2` 
 
-#### MySQL for Icingaweb
-* `WEB_DB_HOST=pgsql`: Database Host
-* `WEB_DB_PORT=5432`: Database Port
-* `WEB_DB_USER=???`: Database User
-* `WEB_DB_PASS=???`: Database Password
-* `WEB_DB=icingaweb2`: Database Name
-
-#### MySQL for Icinga IDO
-* Uses Icingaweb connection if not specified
-* `IDO_DB_HOST=pgsql`: Database Host
-* `IDO_DB_PORT=5432`: Database Port
-* `IDO_DB_USER=???`: Database User
-* `IDO_DB_PASS=???`: Database Password
-* `IDO_DB=icinga`: Database Name
 
 
 ## Maintainer
