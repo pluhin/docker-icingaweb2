@@ -1,12 +1,6 @@
 #!/bin/sh
 set -e
 
-# Copy default config (if volume is empty)
-if [ ! -e /etc/icingaweb2/roles.ini ] ; then
-  cp -a /temp/icingaweb2 /etc
-  chown -R apache /etc/icingaweb2
-fi
-
 # Run setups
 [ -x /init/icingaweb2-setup.sh ] && /init/icingaweb2-setup.sh
 

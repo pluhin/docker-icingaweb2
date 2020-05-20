@@ -32,11 +32,12 @@ RUN apk add --no-cache \
     ln -s /icingaweb2/bin/icingacli /usr/bin/icingacli && \
     chown -R apache /icingaweb2 && \
     mkdir -p /var/log/icingaweb2 && \
-    chown -R apache /var/log/icingaweb2 && \
-    chown -R apache /etc/icingaweb2 
+    chown -R apache /var/log/icingaweb2 
 
 ADD rootfs /
 
+RUN cp -a /temp/icingaweb2 /etc && \
+    chown -R apache /etc/icingaweb2
 EXPOSE 80
 
 CMD ["/init/run.sh"]
