@@ -2,20 +2,8 @@ FROM alpine:3.10
 
 LABEL maintainer="pluhin@gmail.com"
 
-ENV REFRESHED_AT="2020-05-20"\
-    ICINGAWEB_VERSION="2.8.0-rc1" \
-    TIMEZONE="UTC" \
-    ICINGAWEB_AUTOCONF=true \
-    ICINGA_API_PASS="super-secret" \
-    WEB_DB_HOST="" \
-    WEB_DB_PORT="5432" \
-    WEB_DB_USER="icingaweb" \
-    WEB_DB_PASS="" \
-    WEB_DB="icingaweb2" \
-    IDO_DB_HOST="" \
-    IDO_DB_USER="icinga" \
-    IDO_DB_PASS="" \
-    IDO_DB="icinga2"
+ENV REFRESHED_AT="2020-05-26"\
+    TIMEZONE="UTC" 
 
 RUN apk add --no-cache \
       postgresql-client \
@@ -25,7 +13,6 @@ RUN apk add --no-cache \
       php7-posix php7-sockets icingaweb2 &&  \
     ln -sf /usr/bin/php7 /usr/bin/php && \
     mkdir -p /run/apache2 && \
-    echo "Fetch Icingaweb2 ${ICINGAWEB_VERSION}" && \
     sed -r -i "s~^;?date.timezone =.*~date.timezone = ${TIMEZONE:-UTC}~" /etc/php7/php.ini
 
 ADD rootfs /
