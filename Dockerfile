@@ -10,10 +10,14 @@ RUN apk add --no-cache \
       ca-certificates openssl \
       php7 php7-apache2 php7-pdo_pgsql php7-openssl php7-intl php7-ldap php7-gettext \
       php7-ctype php7-json php7-mbstring php7-session php7-curl php7-iconv php7-pcntl \
-      php7-posix php7-sockets icingaweb2 &&  \
-    ln -sf /usr/bin/php7 /usr/bin/php && \
-    mkdir -p /run/apache2 && \
-    sed -r -i "s~^;?date.timezone =.*~date.timezone = ${TIMEZONE:-UTC}~" /etc/php7/php.ini
+      php7-posix php7-sockets \
+    && ln -sf /usr/bin/php7 /usr/bin/php \
+    && mkdir -p /run/apache2 \
+    && sed -r -i "s~^;?date.timezone =.*~date.timezone = ${TIMEZONE:-UTC}~" /etc/php7/php.ini \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk update \
+    && apk install icingaweb2
 
 ADD rootfs /
 
