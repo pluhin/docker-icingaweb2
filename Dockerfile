@@ -17,13 +17,13 @@ RUN apk add --no-cache \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk update \
-    && apk install icingaweb2
+    && apk add --no-cache icingaweb2
 
 ADD rootfs /
 
-RUN cp -a /temp/icingaweb2 /etc && \
-    icingacli module enable monitoring && \
-    chown -R apache /etc/icingaweb2
+RUN cp -a /temp/icingaweb2 /etc \
+    && icingacli module enable monitoring \
+    && chown -R apache /etc/icingaweb2
 EXPOSE 80
 
 CMD ["/init/run.sh"]
