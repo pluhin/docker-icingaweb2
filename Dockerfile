@@ -23,6 +23,8 @@ ADD rootfs /
 
 RUN cp -a /temp/icingaweb2 /etc \
     && icingacli module enable monitoring \
+    && icingacli module enable graphite \
+    && cp -r /usr/local/share/icingaweb2/modules/graphite/templates /etc/icingaweb2/modules/graphite \
     && chown -R apache /etc/icingaweb2
 EXPOSE 80
 
