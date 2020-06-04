@@ -21,10 +21,16 @@ RUN apk add --no-cache \
 
 ADD rootfs /
 
+RUN mkdir -p /usr/share/webapps/icingaweb2/modules/ \
+    && mkdir -p /usr/share/webapps/icingaweb2/modules/graphite \
+    && wget -q -O - "https://github.com/Icinga/icingaweb2-module-graphite/archive/v1.1.0.tar.gz" \
+    | tar xz --strip-components=1 --directory=/usr/share/webapps/icingaweb2/modules/graphite -f - 
+    
+
 RUN cp -a /temp/icingaweb2 /etc \
     && icingacli module enable monitoring \
     && icingacli module enable graphite \
-    && cp -r /usr/local/share/icingaweb2/modules/graphite/templates /etc/icingaweb2/modules/graphite \
+    && cp -r /usr/share/webapps/icingaweb2/modules/graphite/templates /etc/icingaweb2/modules/graphite \
     && chown -R apache /etc/icingaweb2
 EXPOSE 80
 
