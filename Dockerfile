@@ -30,7 +30,7 @@ RUN mkdir -p /usr/share/webapps/icingaweb2/modules/ \
 RUN cp -a /temp/icingaweb2 /etc \
     && icingacli module enable monitoring \
     && icingacli module enable graphite \
-    && cp -r /usr/share/webapps/icingaweb2/modules/graphite/templates /etc/icingaweb2/modules/graphite \
+    # && cp -r /usr/share/webapps/icingaweb2/modules/graphite/templates /etc/icingaweb2/modules/graphite \
     && chown -R apache /etc/icingaweb2
 EXPOSE 80
 
