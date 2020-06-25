@@ -1,8 +1,9 @@
-FROM alpine:3.10
+FROM alpine:3.11
 
 LABEL maintainer="pluhin@gmail.com"
 
-ENV REFRESHED_AT="2020-05-26"\
+ENV REFRESHED_AT="2020-06-25"\
+    IW2_V="2.7.3-r0" \
     TIMEZONE="UTC" 
 
 RUN apk add --no-cache \
@@ -17,7 +18,7 @@ RUN apk add --no-cache \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk update \
-    && apk add --no-cache icingaweb2
+    && apk add --no-cache icingaweb2=${IW2_V}
 
 ADD rootfs /
 
