@@ -1,9 +1,9 @@
-FROM alpine:3.11
+FROM alpine:latest
 
 LABEL maintainer="pluhin@gmail.com"
 
 ENV REFRESHED_AT="2020-06-25"\
-    IW2_V="2.7.3-r0" \
+    IW2_V="2.8.0-r0" \
     TIMEZONE="UTC" 
 
 RUN apk add --no-cache \
