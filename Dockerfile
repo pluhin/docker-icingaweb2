@@ -44,11 +44,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && rm -rf /var/lib/apt/lists/*
 
 
-RUN mkdir -p /usr/share/icingaweb2/modules \
-    # Icingaweb2 Graphite
-    && mkdir -p /usr/share/icingaweb2/modules \
+RUN mkdir -p /usr/share/icingaweb2/modules/graphite \
     && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-graphite/archive/v1.1.0.tar.gz" \
-    | tar xz --strip-components=1 --directory=/usr/share/icingaweb2/modules -f - \
+    | tar xz --strip-components=1 --directory=/usr/share/icingaweb2/modules/graphite -f - \
     && true
 
 ADD content/ /
