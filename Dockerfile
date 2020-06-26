@@ -62,6 +62,7 @@ RUN true \
     && mkdir -p /var/lib/php/sessions \
     && chown -R www-data:www-data /var/lib/php/sessions \
     && icingacli module enable monitoring \
+    && icingacli module enable graphite \
     && icingacli module enable doc \
     && chmod u+s,g+s \
     /bin/ping \
