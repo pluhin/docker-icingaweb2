@@ -55,7 +55,6 @@ ADD content/ /
 
 # Final fixes
 RUN true \
-    && mv /etc/icingaweb2/ /etc/icingaweb2.dist \
     && usermod -aG icingaweb2 www-data \
     && chmod u+s,g+s \
     /bin/ping \
