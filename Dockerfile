@@ -44,11 +44,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && rm -rf /var/lib/apt/lists/*
 
 
-RUN mkdir -p /usr/local/share/icingaweb2/modules/ \
+RUN mkdir -p /usr/share/webapps/icingaweb2/modules \
     # Icingaweb2 Graphite
-    && mkdir -p /usr/local/share/icingaweb2/modules/graphite \
+    && mkdir -p /usr/share/webapps/icingaweb2/modules \
     && wget -q --no-cookies -O - "https://github.com/Icinga/icingaweb2-module-graphite/archive/v1.1.0.tar.gz" \
-    | tar xz --strip-components=1 --directory=/usr/local/share/icingaweb2/modules/graphite -f - \
+    | tar xz --strip-components=1 --directory=/usr/share/webapps/icingaweb2/modules -f - \
     && true
 
 ADD content/ /
@@ -56,6 +56,15 @@ ADD content/ /
 # Final fixes
 RUN true \
     && usermod -aG icingaweb2 www-data \
+    && chmod 2770 /etc/icingaweb2 \
+    && chown -R www-data:icingaweb2 /etc/icingaweb2 \
+    && chmod o-r /etc/icingaweb2/resources.ini \
+    && mkdir -p /var/log/icingaweb2 \
+    && chown -R www-data:adm /var/log/icingaweb2 \
+    && mkdir -p /var/lib/php/sessions \
+    && chown -R www-data:www-data /var/lib/php/sessions \
+    && icingacli module enable monitoring \
+    && icingacli module enable doc \
     && chmod u+s,g+s \
     /bin/ping \
     /bin/ping6 
