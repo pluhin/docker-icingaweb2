@@ -1,0 +1,23 @@
+#!/bin/bash
+
+. /opt/helpers
+
+if [ ! "$(ls -A /etc/icingaweb2/resources.ini)" ]; then
+	echo "=> Copying fresh config-files for /etc/icingaweb2"
+	mkdir -p /etc/icingaweb2
+	cp -R /etc/icingaweb2.dist/* /etc/icingaweb2/
+fi
+
+# chown directories and files that might be coming from volumes
+chmod 2770 /etc/icingaweb2
+chown -R www-data:icingaweb2 /etc/icingaweb2
+chmod o-r /etc/icingaweb2/resources.ini
+mkdir -p /var/log/icingaweb2
+chown -R www-data:adm /var/log/icingaweb2
+
+mkdir -p /var/lib/php/sessions
+chown -R www-data:www-data /var/lib/php/sessions
+
+# enable modules
+icingacli module enable monitoring
+icingacli module enable doc
